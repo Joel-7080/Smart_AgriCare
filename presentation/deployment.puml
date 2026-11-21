@@ -1,0 +1,21 @@
+@startuml
+node "Farmer Device" {
+  [Mobile App]
+}
+node "Web Server" {
+  [API Service]
+}
+node "Inference Node" {
+  [ML Model / Inference Engine]
+}
+node "Database" {
+  [Postgres/SQLite]
+}
+node "Object Storage" {
+  [Image Store]
+}
+Mobile App --> API Service : HTTPS
+API Service --> Inference Engine : local call / RPC
+API Service --> Database : SQL
+API Service --> Object Storage : PUT/GET
+@enduml

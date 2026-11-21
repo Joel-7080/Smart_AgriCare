@@ -1,0 +1,34 @@
+@startuml
+class ImageRequest {
+  +image_path
+  +timestamp
+  +metadata
+  +validate()
+}
+class AnalysisResult {
+  +label
+  +confidence
+  +explanations
+  +recommendations
+}
+class ModelManager {
+  +load_model()
+  +predict(image): AnalysisResult
+  +get_version()
+}
+class KnowledgeBaseService {
+  +lookup(symptoms): Recommendation
+  +update_rule(rule)
+}
+class Recommendation {
+  +text
+  +severity
+  +treatment_steps
+}
+
+ImageRequest --> ModelManager : send
+ModelManager --> AnalysisResult
+AnalysisResult --> KnowledgeBaseService : fallback lookup
+AnalysisResult --> Recommendation
+KnowledgeBaseService --> Recommendation
+@enduml

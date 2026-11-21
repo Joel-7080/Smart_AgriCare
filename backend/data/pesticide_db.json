@@ -1,0 +1,20 @@
+{
+  "diseases": {
+    "early_blight": {
+      "crop": "Tomato",
+      "disease_name": "Early Blight",
+      "symptoms": "Brown spots with concentric rings on leaves",
+      "chemical_pesticides": ["Chlorothalonil", "Mancozeb"],
+      "organic_treatments": ["Neem oil", "Bordeaux mixture"],
+      "prevention": ["Remove affected leaves", "Improve air circulation"]
+    },
+    "healthy": {
+      "crop": "Unknown",
+      "disease_name": "Healthy",
+      "symptoms": "No significant symptoms detected",
+      "chemical_pesticides": [],
+      "organic_treatments": [],
+      "prevention": []
+    }
+  }
+}

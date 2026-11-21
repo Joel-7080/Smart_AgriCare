@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart AgriCare - Plant Disease Detection</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>🌱 Smart AgriCare</h1>
+                <p class="subtitle">Plant Disease Detection & Pesticide Recommendations</p>
+            </div>
+            <div class="header-actions">
+                <span id="userGreeting" class="user-greeting"></span>
+                <a href="/logout" class="btn-logout">Logout</a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Tabs Navigation -->
+            <div class="tabs-navigation">
+                <button class="tab-btn active" data-tab="upload-tab">🔍 Upload & Analyze</button>
+                <button class="tab-btn" data-tab="history-tab">📜 Upload History</button>
+            </div>
+
+            <!-- Upload Tab -->
+            <div id="upload-tab" class="tab-content active">
+                <!-- Upload Section -->
+                <section class="upload-section">
+                    <div class="upload-box">
+                        <div class="upload-icon">📸</div>
+                        <h2>Upload Plant Image</h2>
+                        <p class="upload-text">Upload a photo of a diseased leaf or fruit for instant disease detection</p>
+                        
+                        <div class="file-input-wrapper">
+                            <input type="file" id="imageInput" accept="image/*" />
+                            <label for="imageInput" class="file-input-label">
+                                <span class="btn-primary">Choose Image</span>
+                            </label>
+                        </div>
+                        
+                        <p class="file-info">Supported: JPG, PNG, GIF, BMP (Max 10MB)</p>
+                        
+                        <div id="imagePreview" class="image-preview" style="display: none;">
+                            <img id="previewImg" src="" alt="Image preview">
+                            <button id="removeImageBtn" class="btn-remove">✕ Remove</button>
+                        </div>
+                        
+                        <button id="analyzeBtn" class="btn-analyze" disabled>
+                            Analyze Image
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing image... Please wait</p>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="error-message" style="display: none;">
+                    <span id="errorText"></span>
+                    <button id="closeErrorBtn" class="btn-close">✕</button>
+                </div>
+
+                <!-- Results Section -->
+                <section id="resultsSection" class="results-section" style="display: none;">
+                    <div class="results-container">
+                        <!-- Header -->
+                        <div class="results-header">
+                            <h2>Analysis Results</h2>
+                            <button id="newAnalysisBtn" class="btn-secondary">← New Analysis</button>
+                        </div>
+
+                        <!-- Crop and Disease Info -->
+                        <div class="info-grid">
+                            <div class="info-card primary">
+                                <div class="info-label">Crop Detected</div>
+                                <div class="info-value crop-checkable" id="cropName">-</div>
+                            </div>
+                            <div class="info-card secondary">
+                                <div class="info-label">Disease Detected</div>
+                                <div class="info-value disease-checkable" id="diseaseName">-</div>
+                            </div>
+                            <div class="info-card tertiary">
+                                <div class="info-label">Confidence</div>
+                                <div class="info-value" id="confidenceLevel">-</div>
+                            </div>
+                        </div>
+
+                        <div id="googleCheckCard" class="google-check-card" style="display: none;">
+                            <div class="google-check-header">
+                                <div class="google-check-title-wrap">
+                                    <span class="google-check-badge">🔎</span>
+                                    <strong>Quick Google Verification</strong>
+                                </div>
+                                <button id="closeGoogleCheckBtn" class="btn-close-small" type="button" aria-label="Close verification">✕</button>
+                            </div>
+                            <p>Confirm the crop/disease name before finalizing treatment.</p>
+                            <div id="googlePreviewGrid" class="google-preview-grid"></div>
+                            <a id="googleCheckLink" class="google-open-link" href="#" target="_blank" rel="noopener noreferrer">Open full Google search</a>
+                        </div>
+
+                        <!-- Symptoms -->
+                        <div class="recommendation-card">
+                            <h3 class="card-title">📋 Symptoms</h3>
+                            <p id="symptoms" class="card-content">-</p>
+                        </div>
+
+                        <!-- Chemical Pesticides -->
+                        <div class="recommendation-card">
+                            <h3 class="card-title">💊 Chemical Pesticides</h3>
+                            <ul id="chemicalList" class="recommendation-list">
+                                <li>-</li>
+                            </ul>
+                            <p class="warning-note">⚠️ Use according to label instructions. Follow local regulations.</p>
+                        </div>
+
+                        <!-- Organic Treatments -->
+                        <div class="recommendation-card">
+                            <h3 class="card-title">🌿 Organic Treatments</h3>
+                            <ul id="organicList" class="recommendation-list">
+                                <li>-</li>
+                            </ul>
+                            <p class="note">Eco-friendly alternatives for sustainable farming</p>
+                        </div>
+
+                        <!-- Prevention Measures -->
+                        <div class="recommendation-card">
+                            <h3 class="card-title">🛡️ Prevention Measures</h3>
+                            <ul id="preventionList" class="recommendation-list">
+                                <li>-</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history-tab" class="tab-content">
+                <section class="history-section">
+                    <div class="history-header">
+                        <h2>📜 Upload History</h2>
+                        <div class="history-controls">
+                            <button id="refreshHistoryBtn" class="btn-secondary">🔄 Refresh</button>
+                            <button id="clearAllHistoryBtn" class="btn-danger">🗑️ Clear All</button>
+                        </div>
+                    </div>
+
+                    <div id="historyContainer" class="history-container">
+                        <div class="loading-message">Loading history...</div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Smart AgriCare © 2026 | Powered by Kindwise API | Plant Disease Detection System</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

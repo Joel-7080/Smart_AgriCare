@@ -1,0 +1,14 @@
+@startuml
+start
+:Capture Image;
+:Upload to API;
+:Validate image;
+:Run inference;
+if (confidence >= threshold) then (yes)
+  :Return label & advice;
+else (no)
+  :Run KB lookup;
+  :Return fallback advice;
+endif
+stop
+@enduml

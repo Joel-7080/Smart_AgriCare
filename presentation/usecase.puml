@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor Farmer
+actor Admin
+actor Sensor as "External Sensor"
+
+rectangle "Smart AgriCare System" {
+  Farmer -- (Capture Image)
+  (Capture Image) --> (Upload Image)
+  (Upload Image) --> (Receive Diagnosis)
+  Farmer -- (View History)
+  Admin -- (Manage Models)
+  Admin -- (Update Knowledge Base)
+  Sensor --> (Upload Sensor Data)
+  (Upload Sensor Data) --> (Receive Diagnosis)
+}
+@enduml

@@ -1,0 +1,90 @@
+Slide 1 — Title
+- **Title:** Smart AgriCare — Image-based Crop Diagnosis
+- **Subtitle:** Fast, low-cost field diagnosis using smartphone images
+- **Authors / Team:** [Your Name / Team]
+- **Date / Venue:** [Date]
+
+Slide 2 — Abstract
+- **Overview:** Smart AgriCare automates field diagnosis by combining lightweight image-based ML with a knowledge-base fallback to deliver fast, actionable recommendations.
+- **Objective:** Reduce diagnosis time and crop losses for small-to-medium farms using commodity smartphones.
+- **Approach:** Client image upload → backend inference → fallback lookup → recommendation.
+
+Slide 3 — Introduction
+- **Problem:** Farmers lack timely access to expert diagnosis; crop issues can escalate rapidly.
+- **Scope:** Smartphone-based image capture and web API for diagnosis of pests, diseases, and nutrient disorders.
+- **Key features:** Fast inference, fallback knowledge base, simple UI, logging for analytics.
+
+Slide 4 — Existing System
+- **Manual expert visits:** Accurate but slow and costly.
+- **Generic apps:** Low local accuracy for specific crops and conditions.
+- **Paper/extension services:** Not real-time; limited personalization.
+- **Heavy ML deployments:** Expensive; not suitable for small farms.
+
+Slide 5 — Disadvantages of Existing Systems
+- Slow response time
+- High cost or low accessibility
+- Low robustness across local varieties and field conditions
+- Inefficient use of pesticides due to delayed/mistaken diagnosis
+
+Slide 6 — Proposed System
+- **Smart AgriCare:** Modular backend + lightweight inference + knowledge-base fallback.
+- **Flow:** Image upload → analyze → if low confidence use KB lookup → return diagnosis & actionable steps.
+- **Deployment:** Cloud or local server option; minimal resource requirements.
+
+Slide 7 — Advantages
+- Low-latency responses suitable for field use
+- Robustness via KB fallback for low-confidence cases
+- Extensible to sensors and data sources (soil, weather)
+- Cost-effective and accessible to smallholders
+
+Slide 8 — System Architecture (summary)
+- Client (mobile/web), API service, Inference Engine, Knowledge Base, Database, Admin UI
+- Data flow: Image → API → Inference → (KB fallback) → Recommendation → Log
+
+Slide 9 — Use Case (one-liner)
+- Actor: Farmer; Use case: Capture and upload image → receive diagnosis & treatment steps.
+
+Slide 10 — Sequence (one-liner)
+- Client uploads image; API calls Model; Model returns result; if low confidence API queries KB; API returns results.
+
+Slide 11 — UML Diagrams (list)
+- Use Case Diagram
+- Sequence Diagram
+- Class Diagram
+- Activity Diagram
+- Deployment Diagram
+
+Slide 12 — Software Requirements
+- Python 3.10+, Flask or FastAPI
+- ML framework: PyTorch or TensorFlow (optional)
+- Libraries: requests, Pillow/OpenCV, database driver
+- PlantUML for diagrams
+
+Slide 13 — Hardware Requirements
+- Minimum: 1 vCPU, 1–2 GB RAM, 10–20 GB disk
+- Recommended: 2+ vCPU, 4+ GB RAM, GPU optional for heavy inference
+- Client: Any smartphone with camera and browser
+
+Slide 14 — Result Analysis (how to evaluate)
+- Metrics: Accuracy, Precision, Recall, Top-k accuracy, Confidence calibration, Latency
+- Visuals: Confusion matrix, latency histogram, sample before/after case studies
+
+Slide 15 — Conclusion
+- Smart AgriCare provides a practical, low-cost path to faster diagnosis using images and a KB fallback, improving decision speed and reducing crop losses.
+- Next steps: expand dataset, sensor fusion, usability improvements.
+
+Slide 16 — References
+- Mohanty et al., "Using Deep Learning for Image-Based Plant Disease Detection" (2016)
+- PlantUML docs: https://plantuml.com/
+- Flask: https://flask.palletsprojects.com/
+- FastAPI: https://fastapi.tiangolo.com/
+
+Slide 17 — Demo / Try it
+- Command to test upload script:
+```bash
+python backend/test_upload.py path/to/image.jpg
+```
+
+Slide 18 — Contact / Q&A
+- **Contact:** [Your email]
+- **Q&A:** Open for questions

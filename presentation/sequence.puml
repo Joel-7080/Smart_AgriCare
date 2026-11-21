@@ -1,0 +1,22 @@
+@startuml
+participant Farmer
+participant Client
+participant API
+participant InferenceEngine
+participant KnowledgeBase
+participant DB
+
+Farmer -> Client: Capture image
+Client -> API: POST /api/analyze (image)
+API -> InferenceEngine: analyze(image)
+InferenceEngine --> API: result (label, confidence)
+alt confidence >= threshold
+  API -> DB: log(result)
+  API -> Client: 200 {label, confidence, advice}
+else
+  API -> KnowledgeBase: lookup(similar symptoms)
+  KnowledgeBase --> API: fallback_advice
+  API -> DB: log(fallback)
+  API -> Client: 200 {fallback_advice, note:low_confidence}
+end
+@enduml
